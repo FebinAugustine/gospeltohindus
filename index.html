@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unity of God and Children of God - Flowchart</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 20px;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        border-radius: 15px;
+        color: white;
+      }
+
+      .header h1 {
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .header p {
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        opacity: 0.9;
+      }
+
+      .flowchart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        padding: 20px;
+      }
+
+      .node {
+        position: relative;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .node:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      }
+
+      .start-node {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+        font-weight: bold;
+        font-size: clamp(1rem, 2.5vw, 1.3rem);
+      }
+
+      .main-node {
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        color: #333;
+        font-weight: bold;
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        border: 3px solid #fff;
+      }
+
+      .unity-highlight {
+        background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+        border: 4px solid #ff4757;
+        animation: glow 2s ease-in-out infinite alternate;
+      }
+
+      .children-highlight {
+        background: linear-gradient(135deg, #48dbfb 0%, #0abde3 100%);
+        border: 4px solid #006ba6;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes glow {
+        from {
+          box-shadow: 0 0 20px #ff4757;
+        }
+        to {
+          box-shadow: 0 0 35px #ff4757, 0 0 50px #ff4757;
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.03);
+        }
+      }
+
+      .parallel-node {
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        color: #333;
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
+        margin-left: 40px;
+      }
+
+      .solution-node {
+        background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+        color: #333;
+        font-weight: bold;
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        border: 3px solid #9c88ff;
+      }
+
+      .invitation-node {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        font-weight: bold;
+        font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+        border: 3px solid gold;
+        animation: shine 3s ease-in-out infinite;
+      }
+
+      @keyframes shine {
+        0%,
+        100% {
+          border-color: gold;
+        }
+        50% {
+          border-color: #fff;
+          box-shadow: 0 0 30px gold;
+        }
+      }
+
+      .arrow {
+        width: 3px;
+        height: 40px;
+        background: linear-gradient(to bottom, #667eea, #764ba2);
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .arrow::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 15px solid #764ba2;
+      }
+
+      .parallel-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        margin: 20px 0;
+      }
+
+      .parallel-group .node {
+        flex: 1;
+        min-width: 280px;
+        max-width: 400px;
+      }
+
+      .key-highlight {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .key-highlight::before {
+        content: "⭐";
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 1.5rem;
+        animation: twinkle 2s ease-in-out infinite;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.7;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+      }
+
+      .legend {
+        margin-top: 40px;
+        padding: 20px;
+        background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+        border-radius: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+      }
+
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 15px;
+        background: white;
+        border-radius: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        font-size: clamp(0.8rem, 1.5vw, 1rem);
+      }
+
+      .legend-color {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+      }
+
+      .unity-color {
+        background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+      }
+      .children-color {
+        background: linear-gradient(135deg, #48dbfb 0%, #0abde3 100%);
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+          margin: 10px;
+        }
+
+        .parallel-node {
+          margin-left: 0;
+        }
+
+        .parallel-group {
+          flex-direction: column;
+        }
+
+        .legend {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🌟 The Unity of God & Our Divine Heritage 🌟</h1>
+        <p>A Bridge Between Biblical Truth and Hindu Wisdom</p>
+      </div>
+
+      <div class="flowchart">
+        <!-- Start Node -->
+        <div class="node start-node">
+          <strong>🔍 Start: Connect through shared inquiry</strong><br />
+          "Unknown God" (Acts 17) & Hindu quest for ultimate truth
+        </div>
+
+        <div class="arrow"></div>
+
+        <!-- God as Creator -->
+        <div class="node main-node unity-highlight key-highlight">
+          <strong>🌍 God as Creator & Sustainer</strong><br />
+          Acts 17:24-25 - "The God who made the world and everything in it"
+        </div>
+
+        <div class="parallel-group">
+          <div class="node parallel-node">
+            📿 <strong>Hindu Parallel:</strong><br />
+            Formless Brahman - God as Immeasurable/Bodyless (Yajurveda)
+          </div>
+          <div class="node parallel-node">
+            🕉️ <strong>Hindu Parallel:</strong><br />
+            God as Sustainer (Vishnu/Pervasive Divine)
+          </div>
+        </div>
+
+        <div class="arrow"></div>
+
+        <!-- Unity & Fatherhood -->
+        <div class="node main-node children-highlight key-highlight">
+          <strong>👨‍👩‍👧‍👦 Unity of God & Divine Fatherhood</strong><br />
+          Acts 17:26, 28 - "We are his offspring" -
+          <em>WE ARE CHILDREN OF GOD!</em>
+        </div>
+
+        <div class="parallel-group">
+          <div class="node parallel-node unity-highlight">
+            ☝️ <strong>Hindu Parallel:</strong><br />
+            "God is only one without two" (Rigveda) -
+            <strong>GOD IS ONE!</strong>
+          </div>
+          <div class="node parallel-node children-highlight">
+            👑 <strong>Hindu Parallel:</strong><br />
+            "Sons of the Immortal" (Svetasvatara Upanishad) -
+            <strong>DIVINE CHILDREN!</strong>
+          </div>
+          <div class="node parallel-node">
+            🕉️ <strong>Hindu Parallel:</strong><br />
+            Paramatma/Maheshwara (Bhagavad Gita)
+          </div>
+        </div>
+
+        <div class="arrow"></div>
+
+        <!-- No Idols -->
+        <div class="node main-node">
+          <strong>🚫 God Not Limited by Idols</strong><br />
+          Acts 17:29 - Divine nature not like gold, silver, or stone
+        </div>
+
+        <div class="parallel-group">
+          <div class="node parallel-node">
+            🚫 <strong>Hindu Parallel:</strong><br />
+            "No human image for Him" (Yajurveda)
+          </div>
+          <div class="node parallel-node">
+            🎭 <strong>Hindu Parallel:</strong><br />
+            Deities as Symbolic in Nature
+          </div>
+        </div>
+
+        <div class="arrow"></div>
+
+        <!-- Judgment -->
+        <div class="node main-node">
+          <strong>⚖️ Call to Repentance & Judgment</strong><br />
+          Acts 17:30-31 - God commands all people to repent
+        </div>
+
+        <div class="parallel-group">
+          <div class="node parallel-node">
+            🔄 <strong>Hindu Parallel:</strong><br />
+            Karma & Dharma (accountability)
+          </div>
+          <div class="node parallel-node">
+            🧘 <strong>Hindu Parallel:</strong><br />
+            Tapasya/Prayaschitta (seeking purification)
+          </div>
+        </div>
+
+        <div class="arrow"></div>
+
+        <!-- Solution -->
+        <div class="node solution-node">
+          <strong>✨ The Solution: Jesus Christ</strong><br />
+          Acts 17:31 - God's appointed Judge and Savior<br />
+          <em>Proof: His physical resurrection from the dead</em>
+        </div>
+
+        <div class="arrow"></div>
+
+        <!-- Invitation -->
+        <div class="node invitation-node">
+          <strong>🎯 INVITATION TO ETERNAL LIFE</strong><br />
+          Believe in Jesus for forgiveness and eternal life<br />
+          <em>As children of the ONE GOD, we can return to our Father!</em>
+        </div>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-color unity-color"></div>
+          <span><strong>God is One</strong> - Unity Emphasis</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color children-color"></div>
+          <span><strong>Children of God</strong> - Divine Heritage</span>
+        </div>
+        <div class="legend-item">
+          <span>⭐ Key Biblical-Hindu Connections</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Add interactive hover effects
+      const nodes = document.querySelectorAll(".node");
+
+      nodes.forEach((node) => {
+        node.addEventListener("click", function () {
+          // Create ripple effect
+          const ripple = document.createElement("div");
+          ripple.style.position = "absolute";
+          ripple.style.borderRadius = "50%";
+          ripple.style.background = "rgba(255, 255, 255, 0.6)";
+          ripple.style.transform = "scale(0)";
+          ripple.style.animation = "ripple 0.6s linear";
+          ripple.style.left = "50%";
+          ripple.style.top = "50%";
+          ripple.style.width = "20px";
+          ripple.style.height = "20px";
+          ripple.style.marginLeft = "-10px";
+          ripple.style.marginTop = "-10px";
+
+          this.appendChild(ripple);
+
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
+      });
+
+      // Add CSS for ripple animation
+      const style = document.createElement("style");
+      style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+      document.head.appendChild(style);
+    </script>
+  </body>
+</html>
