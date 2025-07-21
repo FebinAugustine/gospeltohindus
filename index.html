@@ -6,10 +6,22 @@
     <title>Unity of God and Children of God - Flowchart</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <div class="theme-switcher">
-      <button id="themeToggle">Toggle Theme</button>
-    </div>
+  <body class="dark-mode">
+    <nav class="navbar">
+      <div class="navbar-brand">Gospel Flowchart</div>
+      <ul class="navbar-nav">
+        <li><a href="#start-section">Introduction</a></li>
+        <li><a href="#creator-section">Creator God</a></li>
+        <li><a href="#unity-fatherhood-section">Unity & Fatherhood</a></li>
+        <li><a href="#no-idols-section">No Idols</a></li>
+        <li><a href="#repentance-section">Repentance & Judgment</a></li>
+        <li><a href="#solution-section">The Solution</a></li>
+        <li><a href="#invitation-section">Invitation</a></li>
+      </ul>
+      <div class="navbar-toggle">
+        <button id="themeToggle">Toggle Theme</button>
+      </div>
+    </nav>
 
     <div class="container">
       <div class="header">
@@ -18,14 +30,17 @@
       </div>
 
       <div class="flowchart">
-        <div class="node start-node">
+        <div class="node start-node" id="start-section">
           <strong>🔍 Start: Connect through shared inquiry</strong><br />
           "Unknown God" (Acts 17) & Hindu quest for ultimate truth
         </div>
 
         <div class="arrow"></div>
 
-        <div class="node main-node unity-highlight key-highlight">
+        <div
+          class="node main-node unity-highlight key-highlight"
+          id="creator-section"
+        >
           <strong>🌍 God as Creator & Sustainer</strong><br />
           Acts 17:24-25 - "The God who made the world and everything in it"
         </div>
@@ -43,7 +58,10 @@
 
         <div class="arrow"></div>
 
-        <div class="node main-node children-highlight key-highlight">
+        <div
+          class="node main-node children-highlight key-highlight"
+          id="unity-fatherhood-section"
+        >
           <strong>👨‍👩‍👧‍👦 Unity of God & Divine Fatherhood</strong><br />
           Acts 17:26, 28 - "We are his offspring" -
           <em>WE ARE CHILDREN OF GOD!</em>
@@ -68,7 +86,7 @@
 
         <div class="arrow"></div>
 
-        <div class="node main-node">
+        <div class="node main-node" id="no-idols-section">
           <strong>🚫 God Not Limited by Idols</strong><br />
           Acts 17:29 - Divine nature not like gold, silver, or stone
         </div>
@@ -86,7 +104,7 @@
 
         <div class="arrow"></div>
 
-        <div class="node main-node">
+        <div class="node main-node" id="repentance-section">
           <strong>⚖️ Call to Repentance & Judgment</strong><br />
           Acts 17:30-31 - God commands all people to repent
         </div>
@@ -104,7 +122,7 @@
 
         <div class="arrow"></div>
 
-        <div class="node solution-node">
+        <div class="node solution-node" id="solution-section">
           <strong>✨ The Solution: Jesus Christ</strong><br />
           Acts 17:31 - God's appointed Judge and Savior<br />
           <em>Proof: His physical resurrection from the dead</em>
@@ -112,7 +130,7 @@
 
         <div class="arrow"></div>
 
-        <div class="node invitation-node">
+        <div class="node invitation-node" id="invitation-section">
           <strong>🎯 INVITATION TO ETERNAL LIFE</strong><br />
           Believe in Jesus for forgiveness and eternal life<br />
           <em>As children of the ONE GOD, we can return to our Father!</em>
@@ -135,6 +153,17 @@
     </div>
 
     <script>
+      // Set initial theme to dark if not already set, or load from localStorage
+      const body = document.body;
+      const currentTheme = localStorage.getItem("theme");
+
+      if (currentTheme) {
+        body.classList.add(currentTheme + "-mode");
+      } else {
+        body.classList.add("dark-mode"); // Default to dark mode
+        localStorage.setItem("theme", "dark");
+      }
+
       // Add interactive hover effects
       const nodes = document.querySelectorAll(".node");
 
@@ -164,14 +193,6 @@
 
       // Theme toggle functionality
       const themeToggle = document.getElementById("themeToggle");
-      const body = document.body;
-
-      // Check for saved theme preference or set default to light
-      const currentTheme = localStorage.getItem("theme")
-        ? localStorage.getItem("theme")
-        : "light";
-      body.classList.add(currentTheme + "-mode");
-
       themeToggle.addEventListener("click", () => {
         if (body.classList.contains("light-mode")) {
           body.classList.remove("light-mode");
