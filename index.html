@@ -5,11 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Unity of God and Children of God - Flowchart</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
   <body class="dark-mode">
     <nav class="navbar">
       <div class="navbar-brand">Gospel Flowchart</div>
-      <ul class="navbar-nav">
+
+      <button class="hamburger-menu" id="hamburgerMenu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <ul class="navbar-nav" id="navbarNav">
         <li><a href="#start-section">Introduction</a></li>
         <li><a href="#creator-section">Creator God</a></li>
         <li><a href="#unity-fatherhood-section">Unity & Fatherhood</a></li>
@@ -17,9 +26,13 @@
         <li><a href="#repentance-section">Repentance & Judgment</a></li>
         <li><a href="#solution-section">The Solution</a></li>
         <li><a href="#invitation-section">Invitation</a></li>
+        <li class="nav-item theme-toggle-mobile">
+          <button id="themeToggleMobile" class="theme-toggle-button"></button>
+        </li>
       </ul>
-      <div class="navbar-toggle">
-        <button id="themeToggle">Toggle Theme</button>
+
+      <div class="navbar-toggle desktop-toggle">
+        <button id="themeToggleDesktop" class="theme-toggle-button"></button>
       </div>
     </nav>
 
@@ -155,16 +168,36 @@
     <script>
       // Set initial theme to dark if not already set, or load from localStorage
       const body = document.body;
+      const themeToggleDesktop = document.getElementById("themeToggleDesktop");
+      const themeToggleMobile = document.getElementById("themeToggleMobile");
       const currentTheme = localStorage.getItem("theme");
 
-      if (currentTheme) {
-        body.classList.add(currentTheme + "-mode");
-      } else {
-        body.classList.add("dark-mode"); // Default to dark mode
-        localStorage.setItem("theme", "dark");
+      // Function to set the theme and update icons
+      function setTheme(theme) {
+        body.classList.remove("light-mode", "dark-mode");
+        body.classList.add(theme + "-mode");
+        localStorage.setItem("theme", theme);
+        updateThemeIcons(theme);
       }
 
-      // Add interactive hover effects
+      // Function to update the sun/moon icons
+      function updateThemeIcons(theme) {
+        if (theme === "light") {
+          themeToggleDesktop.innerHTML = '<i class="fas fa-moon"></i>';
+          themeToggleMobile.innerHTML = '<i class="fas fa-moon"></i>';
+        } else {
+          themeToggleDesktop.innerHTML = '<i class="fas fa-sun"></i>';
+          themeToggleMobile.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+      }
+
+      if (currentTheme) {
+        setTheme(currentTheme);
+      } else {
+        setTheme("dark"); // Default to dark mode
+      }
+
+      // Add interactive hover effects (existing code)
       const nodes = document.querySelectorAll(".node");
 
       nodes.forEach((node) => {
@@ -192,20 +225,44 @@
       });
 
       // Theme toggle functionality
-      const themeToggle = document.getElementById("themeToggle");
-      themeToggle.addEventListener("click", () => {
+      themeToggleDesktop.addEventListener("click", () => {
         if (body.classList.contains("light-mode")) {
-          body.classList.remove("light-mode");
-          body.classList.add("dark-mode");
-          localStorage.setItem("theme", "dark");
+          setTheme("dark");
         } else {
-          body.classList.remove("dark-mode");
-          body.classList.add("light-mode");
-          localStorage.setItem("theme", "light");
+          setTheme("light");
         }
       });
 
-      // Add CSS for ripple animation (moved from original HTML)
+      themeToggleMobile.addEventListener("click", () => {
+        if (body.classList.contains("light-mode")) {
+          setTheme("dark");
+        } else {
+          setTheme("light");
+        }
+      });
+
+      // Hamburger menu functionality
+      const hamburgerMenu = document.getElementById("hamburgerMenu");
+      const navbarNav = document.getElementById("navbarNav");
+
+      hamburgerMenu.addEventListener("click", () => {
+        navbarNav.classList.toggle("active");
+        hamburgerMenu.querySelector("i").classList.toggle("fa-bars");
+        hamburgerMenu.querySelector("i").classList.toggle("fa-times"); // Change to 'X' icon
+      });
+
+      // Close mobile menu when a nav link is clicked
+      navbarNav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          if (navbarNav.classList.contains("active")) {
+            navbarNav.classList.remove("active");
+            hamburgerMenu.querySelector("i").classList.remove("fa-times");
+            hamburgerMenu.querySelector("i").classList.add("fa-bars");
+          }
+        });
+      });
+
+      // Add CSS for ripple animation (existing code)
       const style = document.createElement("style");
       style.textContent = `
             @keyframes ripple {
@@ -216,6 +273,47 @@
             }
         `;
       document.head.appendChild(style);
+
+      // --- NEW/UPDATED JavaScript for active navbar tabs ---
+      const sections = document.querySelectorAll(".flowchart > div[id]");
+      const navLinks = document.querySelectorAll(".navbar-nav a");
+
+      function highlightNavLink() {
+        let current = "";
+        const scrollY = window.pageYOffset; // Use window.pageYOffset for broader compatibility
+
+        // Loop through sections to find the one currently in view
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop - 90; // Adjust for fixed navbar height + some buffer
+          const sectionHeight = section.clientHeight;
+
+          if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        // If no section is in view (e.g., at the very top before the first section),
+        // default to the first nav link.
+        // This also handles the case where scrollY is 0 and no section has been scrolled into.
+        if (
+          current === "" &&
+          sections.length > 0 &&
+          scrollY < sections[0].offsetTop - 90
+        ) {
+          current = sections[0].getAttribute("id");
+        }
+
+        // Remove 'active' from all links and add to the current one
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.href.includes(current)) {
+            link.classList.add("active");
+          }
+        });
+      }
+
+      window.addEventListener("scroll", highlightNavLink);
+      window.addEventListener("load", highlightNavLink); // Call on load to set initial active tab
     </script>
   </body>
 </html>

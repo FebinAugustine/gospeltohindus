@@ -28,7 +28,7 @@ body {
     #2a2a3e 0%,
     #16213e 100%
   ); /* Dark initial background */
-  color: white;
+  color: white; /* Default color for elements directly inside navbar */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   z-index: 1000;
   transition: background 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
@@ -49,25 +49,24 @@ body {
   margin: 0; /* Ensure no default margin */
 }
 
+/* Default Dark Mode Link Color */
 .navbar-nav a {
-  color: white;
+  color: white; /* Light text for dark theme */
   text-decoration: none;
-  font-weight: 600; /* Bolder links */
+  font-weight: 700; /* Bolder links */
+  font-size: 0.8rem; /* Slightly larger font size */
   padding: 8px 0; /* More padding for larger clickable area */
-  transition: color 0.3s ease, transform 0.2s ease; /* Removed border-bottom transition */
+  transition: color 0.3s ease, transform 0.2s ease;
   position: relative;
-  /* Removed overflow: hidden; as underline animation is gone */
 }
-
-/* --- REMOVED: .navbar-nav a::before and .navbar-nav a:hover::before rules --- */
 
 .navbar-nav a:hover,
 .navbar-nav a:focus {
-  color: #00f2fe; /* Light blue hover */
+  color: #00f2fe; /* Bright color for hover in dark mode */
   transform: translateY(-2px); /* Subtle lift effect */
 }
 
-/* ACTIVE TAB STYLING */
+/* ACTIVE TAB STYLING - Dark Mode */
 .navbar-nav a.active {
   color: #00f2fe; /* Highlight color for active tab in dark mode */
   font-weight: 700; /* Make it bolder */
@@ -75,96 +74,161 @@ body {
   text-shadow: 0 0 8px rgba(0, 242, 254, 0.5); /* Subtle glow */
 }
 
-.navbar-toggle button {
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 18px; /* Larger button */
-  border-radius: 25px; /* More rounded */
+/* Theme Toggle Button Styling */
+.theme-toggle-button {
+  background: none; /* Transparent background */
+  color: white; /* Default dark mode icon color */
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Subtle border */
+  padding: 8px 12px; /* Adjusted padding for icon */
+  border-radius: 50%; /* Make it round */
   cursor: pointer;
-  font-size: 0.95rem; /* Slightly larger font */
-  font-weight: 600;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  font-size: 1.5rem; /* Size of the icon */
+  display: flex; /* To center the icon */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease,
+    transform 0.2s ease, box-shadow 0.3s ease;
   outline: none; /* Remove outline on focus */
 }
 
-.navbar-toggle button:hover {
-  background: #0056b3;
+.theme-toggle-button:hover {
+  background: rgba(255, 255, 255, 0.1); /* Slight background on hover */
+  border-color: #00f2fe; /* Highlight border on hover */
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  color: #00f2fe; /* Ensure icon color remains visible on hover in dark mode */
 }
 
-/* Light Mode Styles */
+/* Hamburger Menu Icon */
+.hamburger-menu {
+  display: none; /* Hidden by default on desktop */
+  background: none;
+  border: none;
+  font-size: 1.8rem; /* Size of the hamburger icon */
+  color: white; /* Default dark mode icon color */
+  cursor: pointer;
+  outline: none;
+  z-index: 1001; /* Ensure it's above other elements if needed */
+}
+
+.theme-toggle-mobile {
+  display: none; /* Hidden by default, shown in mobile view */
+}
+
+---
+/* Light Mode Styles (Elegant Blue, Baby Pink, White) */
 body.light-mode {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #333;
+  background: linear-gradient(
+    135deg,
+    #e0f2f7 0%,
+    #ffeaf7 100%
+  ); /* Soft light blue to baby pink background */
+  color: #333; /* Darker text for readability throughout the body */
 }
 
 body.light-mode .navbar {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  color: white;
+  background: linear-gradient(
+    135deg,
+    #87ceeb 0%,
+    #ffb6c1 100%
+  ); /* Sky blue to light pink navbar */
+  color: #000; /* Set a default dark color for elements within navbar in light mode */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+/* SPECIFIC CHANGE FOR NAVBAR TAB TEXT IN LIGHT MODE */
 body.light-mode .navbar-nav a {
-  color: white;
+  color: #000; /* Dark text for nav links in light mode */
 }
-
-/* --- REMOVED: body.light-mode .navbar-nav a::before --- */
 
 body.light-mode .navbar-nav a:hover,
 body.light-mode .navbar-nav a:focus {
-  color: #ffe140; /* Yellow hover */
+  color: #007bff; /* Blue hover for links */
+  transform: translateY(-2px);
 }
 
 /* ACTIVE TAB STYLING - Light Mode */
 body.light-mode .navbar-nav a.active {
-  color: #ffe140; /* Highlight color for active tab in light mode */
+  color: #007bff; /* Blue for active tab */
   font-weight: 700;
-  text-shadow: 0 0 8px rgba(255, 225, 64, 0.5); /* Subtle glow */
+  text-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Subtle blue glow */
 }
 
-body.light-mode .navbar-toggle button {
-  background: #007bff;
-  color: white;
+body.light-mode .theme-toggle-button {
+  background: rgba(255, 255, 255, 0.3); /* Semi-transparent white background */
+  color: #333; /* Darker icon color */
+  border: 2px solid #87ceeb; /* Blue border */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .theme-toggle-button:hover {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: #ffb6c1; /* Pink border on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode .hamburger-menu {
+  color: #000; /* Hamburger icon now black in light mode */
 }
 
 body.light-mode .container {
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.9); /* Opaque white container background */
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08); /* Lighter shadow */
 }
 
 body.light-mode .header {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  color: white;
+  background: linear-gradient(
+    135deg,
+    #41add7 0%,
+    #ffb6c1 100%
+  ); /* Blue to pink header */
+  color: #333; /* Ensuring header text is dark for readability */
 }
 
 body.light-mode .main-node {
-  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  background: linear-gradient(
+    135deg,
+    #add8e6 0%,
+    #ffc0cb 100%
+  ); /* Light blue to pink nodes */
   color: #333;
-  border: 3px solid #fff;
+  border: 3px solid #fff; /* White border for emphasis */
 }
 
 body.light-mode .parallel-node {
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  color: #333;
+  background: linear-gradient(
+    135deg,
+    #e0f8ff 0%,
+    #fef0f5 100%
+  ); /* Very light blue to pink parallel nodes */
+  color: #555; /* Slightly softer text for parallel nodes */
 }
 
 body.light-mode .solution-node {
-  background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+  background: linear-gradient(
+    135deg,
+    #b0e0e6 0%,
+    #ffddf4 100%
+  ); /* Powder blue to light orchid pink */
   color: #333;
-  border: 3px solid #9c88ff;
+  border: 3px solid #87ceeb; /* Blue border */
 }
 
 body.light-mode .legend {
-  background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+  background: linear-gradient(
+    135deg,
+    #f0f8ff 0%,
+    #fefefe 100%
+  ); /* Alice blue to pure white legend */
+  border: 1px solid rgba(0, 0, 0, 0.05); /* Very subtle border */
 }
 
 body.light-mode .legend-item {
   background: white;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Even lighter shadow */
+  color: #333;
 }
 
 /* Dark Mode Styles (Initial State) */
@@ -178,6 +242,8 @@ body.dark-mode .navbar {
   color: white;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
+
+/* No specific change needed here for dark mode links as they default to white */
 
 body.dark-mode .container {
   background: rgba(30, 30, 50, 0.95);
@@ -445,58 +511,103 @@ body.dark-mode .arrow::after {
   background: linear-gradient(135deg, #48dbfb 0%, #0abde3 100%);
 }
 
-/* Responsive adjustments for smaller screens */
+/* --- Responsive adjustments for smaller screens --- */
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
-    align-items: center; /* Center items in column layout */
-    padding: 15px;
+    flex-wrap: wrap; /* Allow items to wrap */
+    padding: 15px 20px;
   }
 
   .navbar-brand {
-    margin-bottom: 15px; /* Space below brand in mobile */
+    flex-grow: 1; /* Allows brand to take available space */
+  }
+
+  .hamburger-menu {
+    display: block; /* Show hamburger on small screens */
+  }
+
+  .desktop-toggle {
+    display: none; /* Hide desktop theme toggle on small screens */
   }
 
   .navbar-nav {
     flex-direction: column;
-    gap: 10px;
-    margin-top: 0; /* Reset margin */
     width: 100%;
     text-align: center;
-    margin-bottom: 15px; /* Space below nav links */
+    background: linear-gradient(
+      135deg,
+      #2a2a3e 0%,
+      #16213e 100%
+    ); /* Same as navbar for consistency */
+    position: absolute;
+    top: 70px; /* Below the fixed navbar */
+    left: 0;
+    transform: translateY(-100%); /* Hide menu above viewport */
+    transition: transform 0.4s ease-out; /* Smooth slide-down animation */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .navbar-nav.active {
+    transform: translateY(0); /* Show menu */
   }
 
   .navbar-nav li {
-    width: 100%;
+    margin: 10px 0;
+    width: 100%; /* Full width for list items */
   }
 
+  /* Mobile link styling for dark mode */
   .navbar-nav a {
-    display: block;
-    padding: 10px 0;
-    border-radius: 8px; /* Slightly more rounded for tabs */
+    padding: 12px 0; /* More padding for tap targets */
+    border-radius: 5px;
+    display: block; /* Make links block level */
+    width: 90%; /* Slightly smaller than full width */
+    margin: 0 auto; /* Center the links */
     background-color: rgba(
       255,
       255,
       255,
-      0.08
+      0.05
     ); /* Subtle background for tabs in mobile (dark mode) */
-    border-bottom: none; /* Remove underline in mobile tabs */
+    color: white; /* Light text for mobile nav links in dark mode */
   }
 
+  /* Light mode specific mobile nav background */
+  body.light-mode .navbar-nav {
+    background: linear-gradient(
+      135deg,
+      #87ceeb 0%,
+      #ffb6c1 100%
+    ); /* Blue to pink gradient for mobile nav */
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  /* SPECIFIC CHANGE FOR MOBILE NAVBAR TAB TEXT IN LIGHT MODE */
   body.light-mode .navbar-nav a {
     background-color: rgba(
-      0,
-      0,
-      0,
-      0.05
-    ); /* Light mode mobile tab background */
+      255,
+      255,
+      255,
+      0.2
+    ); /* Semi-transparent white background for mobile links */
+    color: #000; /* Dark text for mobile nav links in light mode */
   }
 
-  /* --- REMOVED: .navbar-nav a:hover::before for mobile tabs --- */
+  .theme-toggle-mobile {
+    display: block; /* Show mobile theme toggle inside the nav list */
+    width: 100%;
+    text-align: center;
 
-  .navbar-toggle {
-    margin-top: 0; /* Reset margin */
-    align-self: center; /* Center toggle button in mobile */
+    /* Removed padding: 0; as it was overriding the li's margin */
+  }
+
+  .theme-toggle-mobile .theme-toggle-button {
+    width: 60px; /* Fixed width for the button in mobile menu */
+    height: 60px; /* Fixed height for the button in mobile menu */
+    margin: 20px auto 0 auto; /* **FIXED: Added top margin directly to the button** */
+    font-size: 1.5rem; /* Larger icon in mobile menu */
   }
 
   .container {
