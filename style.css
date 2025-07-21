@@ -67,12 +67,12 @@ body {
 }
 
 /* ACTIVE TAB STYLING - Dark Mode */
-.navbar-nav a.active {
-  color: #00f2fe; /* Highlight color for active tab in dark mode */
-  font-weight: 700; /* Make it bolder */
-  transform: translateY(-2px); /* Maintain lift */
-  text-shadow: 0 0 8px rgba(0, 242, 254, 0.5); /* Subtle glow */
-}
+/* .navbar-nav a.active {
+  /* color: #00f2fe; 
+  font-weight: 700; /
+  transform: translateY(-2px); 
+  text-shadow: 0 0 8px rgba(0, 242, 254, 0.5); 
+}  */
 
 /* Theme Toggle Button Styling */
 .theme-toggle-button {
@@ -150,11 +150,11 @@ body.light-mode .navbar-nav a:focus {
 }
 
 /* ACTIVE TAB STYLING - Light Mode */
-body.light-mode .navbar-nav a.active {
-  color: #007bff; /* Blue for active tab */
+/* body.light-mode .navbar-nav a.active {
+  color: #007bff; 
   font-weight: 700;
-  text-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Subtle blue glow */
-}
+  text-shadow: 0 0 8px rgba(0, 123, 255, 0.5); 
+} */
 
 body.light-mode .theme-toggle-button {
   background: rgba(255, 255, 255, 0.3); /* Semi-transparent white background */
@@ -549,9 +549,9 @@ body.dark-mode .arrow::after {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .navbar-nav.active {
-    transform: translateY(0); /* Show menu */
-  }
+  /* .navbar-nav.active {
+    transform: translateY(0);
+  } */
 
   .navbar-nav li {
     margin: 10px 0;
